@@ -1,6 +1,6 @@
 # Neural Network From Scratch
 
-A simple learning project built lesson by lesson with NumPy.
+A simple learning project built lesson by lesson with Python.
 
 ## Where each lesson goes
 
@@ -28,10 +28,10 @@ Start with `nn/layers.py`, `nn/activations.py`, `nn/losses.py`, and `nn/model.py
 
 ## Running the learning project
 
-From the repository root, use the NumPy environment created by `uv`:
+From the repository root, run the project with Python:
 
 ```sh
-uv run python -c "from nn_project.nn.layers import Neuron"
+python -c "from nn_project.nn.layers import Neuron"
 ```
 
 When you create your own practice file inside `nn_project`, import the neuron like this:
@@ -40,4 +40,4 @@ When you create your own practice file inside `nn_project`, import the neuron li
 from nn.layers import Neuron
 ```
 
-Run that file from inside `nn_project` with `uv run python your_file.py`. Use `uv run` for this project so the interpreter uses the NumPy version declared in the root `pyproject.toml`.
+Run that file from inside `nn_project` with `python your_file.py`.

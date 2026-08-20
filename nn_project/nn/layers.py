@@ -1,14 +1,14 @@
 """Neural network layers."""
 
-import numpy
+from .math_utils import dot_product
 
 
 class Neuron:
     """A single neuron with a configurable activation function."""
 
     def __init__(self, weights, bias, activation_function):
-        # Store the weights as a NumPy array so lists work with dot products.
-        self.weights = numpy.array(weights, dtype=float)
+        # Store the weights as a list of numbers.
+        self.weights = [float(weight) for weight in weights]
 
         # Store the bias separately because it is added after the dot product.
         self.bias = float(bias)
@@ -17,11 +17,8 @@ class Neuron:
         self.activation_function = activation_function
 
     def forward(self, inputs):
-        # Convert the input list to the same numeric format as the weights.
-        input_values = numpy.array(inputs, dtype=float)
-
-        # Calculate the weighted sum of the input values.
-        weighted_sum = numpy.dot(self.weights, input_values)
+        # Calculate the weighted sum using the dot product helper.
+        weighted_sum = dot_product(self.weights, inputs)
 
         # Add the bias to complete the neuron's linear calculation.
         neuron_value = weighted_sum + self.bias
