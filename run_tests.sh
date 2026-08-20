@@ -24,6 +24,8 @@ CC_BIN=cc;  command -v gcc >/dev/null 2>&1 && CC_BIN=gcc
 CXX_BIN=c++; command -v g++ >/dev/null 2>&1 && CXX_BIN=g++
 # Windows installs often have "python", not "python3".
 PY_BIN=python3; command -v python3 >/dev/null 2>&1 || PY_BIN=python
+UV_BIN=uv
+command -v uv >/dev/null 2>&1 || UV_BIN=uv.exe
 
 compile() {
   case "$LANG_SLUG" in
@@ -55,7 +57,8 @@ run_one() { # $1 = input file
     c|cpp|rust|assembly|basic|cobol|d|fortran|pascal) ./.prog < "$1" ;;
     csharp|vbnet) mono .prog.exe < "$1" ;;
     kotlin)     java -jar .prog.jar < "$1" ;;
-    python)     "$PY_BIN" "$ENTRY" < "$1" ;;
+    # uv selects the project's virtual environment and its NumPy dependency.
+    python)     "$UV_BIN" run python "$ENTRY" < "$1" | tr -d '\r' ;;
     javascript) node "$ENTRY" < "$1" ;;
     typescript) npx -y tsx "$ENTRY" < "$1" ;;
     go)         go run "$ENTRY" < "$1" ;;
