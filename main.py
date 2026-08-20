@@ -1,5 +1,7 @@
 import sys, math
 from nn_project.nn.activations import sigmoid
+from nn_project.nn.layers import Neuron
+
 for raw in sys.stdin:
     line = raw.rstrip("\n").strip()
     if not line: continue
@@ -11,5 +13,6 @@ for raw in sys.stdin:
 
     # TODO: compute z = dot(w, x) + b, then print sigmoid(z) = 1 / (1 + exp(-z))
     # rounded to 4 decimals.
-    z = sum(a * b for a, b in zip(w, x)) + b
-    print(f"{sigmoid(z):.4f}")
+    neuron = Neuron(w, b, sigmoid)
+
+    print(f"{neuron.forward(x):.4f}")
